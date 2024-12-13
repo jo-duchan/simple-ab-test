@@ -18,3 +18,20 @@ interface FigmaProtoParams {
   isDeviceFrame?: boolean;
   isHideUI?: boolean;
 }
+
+export const generateFigmaProtoURL = ({
+  url,
+  isDeviceFrame = false,
+  isHideUI = true,
+}: FigmaProtoParams): string => {
+  const { protoId, nodeId } = parsedFigmaUrl(url);
+
+  const BASE_URL = "https://embed.figma.com/proto";
+  const startNodeId = `starting-point-node-id=${nodeId}`;
+  const embedHost = `embed-host=${process.env.FIGMA_HOST_ID}`;
+  const deviceFrame = `device-frame=${isDeviceFrame}`;
+  const hideUI = `hide-ui=${isHideUI ? 1 : 0}`;
+  const clientId = `client-id=${process.env.FIGMA_CLIENT_ID}`;
+
+  return `${BASE_URL}/${protoId}?${startNodeId}&${embedHost}&${deviceFrame}&${hideUI}&${clientId}`;
+};

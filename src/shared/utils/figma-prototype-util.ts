@@ -28,10 +28,10 @@ export const generateFigmaProtoURL = ({
 
   const BASE_URL = "https://embed.figma.com/proto";
   const startNodeId = `starting-point-node-id=${nodeId}`;
-  const embedHost = `embed-host=${process.env.FIGMA_HOST_ID}`;
+  const embedHost = `embed-host=${process.env.NEXT_PUBLIC_FIGMA_HOST_ID}`;
   const deviceFrame = `device-frame=${isDeviceFrame}`;
   const hideUI = `hide-ui=${isHideUI ? 1 : 0}`;
-  const clientId = `client-id=${process.env.FIGMA_CLIENT_ID}`;
+  const client = `client-id=${process.env.NEXT_PUBLIC_FIGMA_CLIENT_ID}`;
 
-  return `${BASE_URL}/${protoId}?${startNodeId}&${embedHost}&${deviceFrame}&${hideUI}&${clientId}`;
+  return `${BASE_URL}/${protoId}?${startNodeId}&${embedHost}&${deviceFrame}&${hideUI}&${client}`;
 };

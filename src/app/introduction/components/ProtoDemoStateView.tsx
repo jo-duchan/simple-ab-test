@@ -14,7 +14,7 @@ function StateViewItem(props: StateViewItemProps) {
   return (
     <div className={styles["state-view-item"]}>
       <h3>페이지 이름: {props.pageId}</h3>
-      <p>터치(클릭) 수: {props.count}ms</p>
+      <p>터치(클릭) 수: {props.count}</p>
       <p>페이지 체류 시간: {props.time}ms</p>
     </div>
   );

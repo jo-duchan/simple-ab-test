@@ -27,13 +27,18 @@ export const generateFigmaProtoURL = ({
   const { protoId, nodeId } = parsedFigmaUrl(url);
 
   const BASE_URL = "https://embed.figma.com/proto";
-  const startNodeId = `starting-point-node-id=${nodeId}`;
-  const embedHost = `embed-host=${process.env.NEXT_PUBLIC_FIGMA_HOST_ID}`;
-  const deviceFrame = `device-frame=${isDeviceFrame}`;
-  const hideUI = `hide-ui=${isHideUI ? 1 : 0}`;
-  const client = `client-id=${process.env.NEXT_PUBLIC_FIGMA_CLIENT_ID}`;
 
-  return `${BASE_URL}/${protoId}?${startNodeId}&${embedHost}&${deviceFrame}&${hideUI}&${client}`;
+  // URLSearchParams로 쿼리 파라미터 생성
+  const params = new URLSearchParams({
+    "starting-point-node-id": nodeId || "",
+    "embed-host": process.env.NEXT_PUBLIC_FIGMA_HOST_ID || "",
+    "device-frame": isDeviceFrame.toString(),
+    "hide-ui": isHideUI ? "1" : "0",
+    "content-scaling": "responsive",
+    "client-id": process.env.NEXT_PUBLIC_FIGMA_CLIENT_ID || "",
+  });
+
+  return `${BASE_URL}/${protoId}?${params.toString()}`;
 };
 
 export function createTimer() {

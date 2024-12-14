@@ -1,12 +1,29 @@
 .container {
   width: 540px;
   height: 800px;
+}
+.innerWrapper {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #cdcdcf;
+  border-radius: 8px;
+  background-color: #fff;
+  padding: 40px;
+  box-sizing: border-box;
+}
 
-  div {
-    width: 100%;
-    height: 100%;
-    border: 1px solid #cdcdcf;
-    border-radius: 8px;
-    background-color: #fff;
+.state-view-item {
+  margin-bottom: 40px;
+
+  h3,
+  p {
+    margin: 0;
+  }
+
+  h3 {
+    margin-bottom: 6px;
+  }
+  p {
+    margin-bottom: 4px;
   }
 }

@@ -37,7 +37,7 @@ export default function ProtoDemoStateView() {
         <h3 className={styles.totalTimeSpent}>
           목적 달성 시간:{" "}
           {Object.entries(data.timeSpent)
-            .reduce((acc, [_, time]) => (acc += time), 0)
+            .reduce((acc, cur) => (acc += cur[1]), 0)
             .toString()}
           ms
         </h3>

@@ -35,3 +35,16 @@ export const generateFigmaProtoURL = ({
 
   return `${BASE_URL}/${protoId}?${startNodeId}&${embedHost}&${deviceFrame}&${hideUI}&${client}`;
 };
+
+export function createTimer() {
+  let startTime = 0;
+
+  return {
+    start() {
+      startTime = performance.now();
+    },
+    getElapsedTime() {
+      return performance.now() - startTime;
+    },
+  };
+}

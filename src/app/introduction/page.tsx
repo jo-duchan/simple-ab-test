@@ -8,7 +8,7 @@ export default function Page() {
       <h3>Introduction Page</h3>
       <FigmaPrototype
         url="https://www.figma.com/proto/iIwEmaTF9xhYmyNdgqjL1b/test11?node-id=7-3&node-type=frame&t=Vvt0RLmYtybsltha-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=7%3A3"
-        lastNodeId="7-9"
+        lastNodeId="222:2"
       />
     </div>
   );

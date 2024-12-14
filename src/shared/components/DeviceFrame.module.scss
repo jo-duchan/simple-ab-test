@@ -1,0 +1,13 @@
+.device-frame {
+  width: 540px;
+  height: 800px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & > iframe {
+    border: 2px solid #cdcdcf;
+    border-radius: 8px;
+    background-color: #fff;
+  }
+}

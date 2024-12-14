@@ -6,6 +6,8 @@ import {
   createTimer,
 } from "../utils/figma-prototype-util";
 import { UserActionData, TimeSpentData } from "../types/prototype-analytics";
+import useAnalyticsStore from "@/store/prototype-analytics-store";
+import { useShallow } from "zustand/react/shallow";
 
 interface Props {
   url: string;
@@ -25,6 +27,12 @@ export default function FigmaPrototype({
   const [userActions, setUserActions] = useState<UserActionData>({});
   const [timeSpent, setTimeSpent] = useState<TimeSpentData>({});
   const timerRef = useRef(createTimer()); // 타이머 유지
+  const { setAnalytics, resetAnalytics } = useAnalyticsStore(
+    useShallow((state) => ({
+      setAnalytics: state.setAnalytics,
+      resetAnalytics: state.resetAnalytics,
+    }))
+  );
 
   useEffect(() => {
     const generatedUrl = generateFigmaProtoURL({
@@ -75,6 +83,10 @@ export default function FigmaPrototype({
 
       if (event.origin !== expectedOrigin) return;
 
+      if (event.data.type === "INITIAL_LOAD") {
+        resetAnalytics();
+      }
+
       if (event.data.type === "PRESENTED_NODE_CHANGED") {
         // 이전 페이지의 체류 시간 기록 및 새 페이지 타이머 시작
         logTimeSpent(currentId, nodeId);
@@ -103,7 +115,11 @@ export default function FigmaPrototype({
 
   useEffect(() => {
     if (currentId === lastNodeId) {
-      console.log(userActions, timeSpent);
+      setAnalytics({
+        userActions,
+        timeSpent,
+      });
+      console.log("??????", userActions, timeSpent);
     }
   }, [currentId, lastNodeId]);
 

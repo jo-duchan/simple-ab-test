@@ -20,16 +20,20 @@ export default function FigmaPrototype({
   isDeviceFrame = false,
   isHideUI = true,
 }: Props) {
+  const [embedUrl, setEmbedUrl] = useState<string | null>(null);
   const [currentId, setCurrentId] = useState<string>("");
   const [userActions, setUserActions] = useState<UserActionData>({});
   const [timeSpent, setTimeSpent] = useState<TimeSpentData>({});
   const timerRef = useRef(createTimer()); // 타이머 유지
 
-  const embedUrl = generateFigmaProtoURL({
-    url,
-    isDeviceFrame,
-    isHideUI,
-  });
+  useEffect(() => {
+    const generatedUrl = generateFigmaProtoURL({
+      url,
+      isDeviceFrame,
+      isHideUI,
+    });
+    setEmbedUrl(generatedUrl);
+  }, [url, isDeviceFrame, isHideUI]);
 
   const logUserAction = (
     nodeId: string,
@@ -77,7 +81,10 @@ export default function FigmaPrototype({
         setCurrentId(nodeId); // 현재 페이지 ID 업데이트
       }
 
-      if (event.data.type === "MOUSE_PRESS_OR_RELEASE") {
+      if (
+        event.data.type === "MOUSE_PRESS_OR_RELEASE" &&
+        event.data.data.targetNodeId
+      ) {
         logUserAction(nodeId, event.data.data.targetNodeMousePosition);
       }
     };
@@ -96,14 +103,14 @@ export default function FigmaPrototype({
 
   useEffect(() => {
     if (currentId === lastNodeId) {
-      console.log("마지막 페이지 도착");
       console.log(userActions, timeSpent);
     }
   }, [currentId, lastNodeId]);
 
-  return (
-    <div style={{ width: "100%", height: "100%" }}>
-      <iframe src={embedUrl} width="100%" height="100%" allowFullScreen />
-    </div>
-  );
+  // 로딩 상태 처리
+  if (!embedUrl) {
+    return <p>Loading Figma Embed...</p>;
+  }
+
+  return <iframe src={embedUrl} width="100%" height="100%" allowFullScreen />;
 }

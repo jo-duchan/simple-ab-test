@@ -14,7 +14,7 @@ function StateViewItem(props: StateViewItemProps) {
   return (
     <div className={styles["state-view-item"]}>
       <h3>페이지 이름: {props.pageId}</h3>
-      <p>터치(클릭) 수: {props.count}ms</p>
+      <p>액션(클릭) 수: {props.count}</p>
       <p>페이지 체류 시간: {props.time}ms</p>
     </div>
   );
@@ -22,6 +22,18 @@ function StateViewItem(props: StateViewItemProps) {
 
 export default function ProtoDemoStateView() {
   const { data } = useAnalyticsStore();
+
+  if (Object.keys(data.timeSpent).length === 0) {
+    return (
+      <div className={styles.container}>
+        <div className={styles.innerWrapper}>
+          <h3>Simple A/B Test Demo</h3>
+          <p>상품을 구입하는 간단한 프로토타입입니다.</p>
+          <p>상품을 장바구니에 담고, 주문을 완료해 보세요.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.container}>

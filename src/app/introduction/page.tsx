@@ -9,8 +9,8 @@ export default function Page() {
     <div className={styles.container}>
       <DeviceFrame>
         <FigmaPrototype
-          url="https://www.figma.com/proto/iIwEmaTF9xhYmyNdgqjL1b/test11?node-id=346-16&t=S7NEQeRXmWJH95DP-0&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=346%3A16&show-proto-sidebar=1"
-          lastNodeId="346:19"
+          url="https://www.figma.com/proto/BvoAQg077j9Qe1XiBIs50N/Simple-A%2FB-Test?node-id=8-59&p=f&t=rKpdKaDt40KPlqdv-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=2%3A3532"
+          lastNodeId="8:59"
           isDeviceFrame
         />
       </DeviceFrame>
